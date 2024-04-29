@@ -1,0 +1,84 @@
+
+.header{
+background: var(--secondary);
+color: beige;
+}
+.nav{
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	padding: 15px 30px;
+}
+.logo{
+	gap: 5px;
+}
+.logo_car{
+	background: var(--accent);
+	padding: 10px;
+	border-radius: 50%;
+	width: 30px;
+	height: 30px;
+	position: relative;
+}
+.logo_car::before{
+	content: '';
+	position: absolute;
+	width: 4px;
+	display: block;
+	background: beige;
+	aspect-ratio: 1/1;
+	border-radius: 50%;
+	bottom: -2px;
+	left: 0;
+
+}
+.nav_right{
+	gap: 12px;
+	font-size: 1.2rem;
+}
+
+.message,.notification{
+	position: relative;
+}
+.message p,.notification p{
+	content: '';
+	width: 12px;
+	height: 12px;
+	justify-content: center;
+	color: beige;
+	background: red;
+	border-radius: 50%;
+	position: absolute;
+	top: -3px;
+	right: -3px;
+	overflow: hidden;
+	font-size: 10px;
+
+}
+.profile{
+	gap: 5px;
+}
+.profile_photo{
+	width: 30px;
+	border-radius: 5px;
+	aspect-ratio: 1/1;
+	overflow: hidden;
+background: wheat;
+
+}
+.arrow{
+	font-size: 12px;
+	font-weight: 800;
+}
+.need_help{
+	background: var(--accent);
+	padding: 10px ;
+	color: var(--text);
+	border-radius: 10px;
+}
+
+@media  (max-width:1200px){
+	.nav_left{
+		display: none;
+	}
+}

@@ -1,0 +1,99 @@
+.carpage{
+	width: 100%;
+	padding: 10px 30px;
+}
+.carpage_top{
+	display: flex;
+	justify-content: space-between;
+	margin-bottom:1rem;
+}
+.filters{
+	gap: 10px;
+	justify-content:flex-start;
+	border-radius: 10px;
+	overflow: auto;
+}
+.filters::-webkit-scrollbar{
+	display: none;
+}
+.filter{
+	gap: 16px;
+	padding: 10px;
+	background: var(--primary);
+	border-radius: 10px;
+	width: auto;
+	text-align: center;
+	display: inline;
+	text-transform: capitalize;
+}
+.carpage_list{
+	display: grid;
+	justify-content: center;
+	grid-template-columns: repeat(auto-fill, minmax(17rem, 2fr));
+	grid-template-rows: 1fr 1fr;
+	gap: 20px;
+	height: 70vh;
+	width: 100%;
+	overflow: auto;
+}
+/* CARD */
+.card{
+	background: var(--primary);
+	border-radius: 5px;
+	max-width: 	25rem;
+	
+}
+
+.card_content{
+	display: grid;
+	padding: 5px 10px;
+	overflow: hidden;
+
+}
+.card_image{
+  width: 100%;
+  background: red;
+  max-width: 	20rem;
+  aspect-ratio: 1/.6;
+  overflow: hidden;
+ justify-self: center;
+
+}
+.card_image img{
+	height: 100%;
+
+}
+.name,.card_bottom{
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+}
+.name{
+
+	margin-bottom: 10px;
+}
+.bookmark{
+	font-size: 2rem;
+	color: var(--accent);
+}
+.tag {
+	background: var(--accent);
+	color: var(--alt-text);
+	padding: 4px 10px;
+	border-radius: 10px;
+}
+.card_bottom{
+margin-top: 10px;
+}
+.price{
+	display: flex;
+	align-items: center;
+	font-size: 1rem;
+}
+.price i{
+   font-size: 1.5rem;
+   font-family:cursive;
+}
+.price h3{
+
+}

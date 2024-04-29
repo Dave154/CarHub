@@ -1,0 +1,99 @@
+
+
+
+:root{ 
+	--text:#000;
+	--alt-text:#ddd;
+	--background:whitesmoke;
+	--primary:#fff;
+	--secondary:#1c1c1c;
+	--accent:purple;
+	--light-border:rgba(20,20,20 ,.2);
+	--font-size:.8rem;
+
+}
+
+
+*{
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
+}
+
+body {
+	background: var(--background);
+    font-size: var(--font-size);
+    color: var(--text);
+}
+a{
+	text-decoration: none;
+	color: inherit;
+}
+ul{
+	list-style: none;
+}
+button,input{
+	background: none;
+	border: 0;
+	outline: 0;
+}
+img{
+	width: 100%;
+	object-fit: cover;
+}
+
+.active button{
+	background:var(--accent);
+	color: var(--alt-text);
+}
+
+/*REUSABLE*/
+
+.flex{
+	display: flex;
+	align-items: center;
+}
+
+.temp_section{
+	align-items: flex-start;
+	width: 100%;
+	overflow: hidden;
+}
+
+
+::-webkit-scrollbar{
+	width: 3px;
+
+}
+::-webkit-scrollbar-thumb{
+	background: var(--accent);
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
