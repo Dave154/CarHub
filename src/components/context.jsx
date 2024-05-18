@@ -29,9 +29,27 @@ const price = data.reduce((prices, item)=>{
 })
 const reducer =(state,action)=>{
  switch(action.type){
- 		
+ case 'OPEN_CURRENT_VIEW':
+ 	return {...state,  currentViewListOpen:!state.currentViewListOpen}
+ 	break;
+ case 'UPDATE_CURRENT_VIEW':
+ 
+ 	return {...state, currentView:action.payload,  currentViewListOpen:false}
+ 	break;
+ case 'TOGGLE_SIDE':
+ 	return{ ...state,isSideOpen:!state.isSideOpen}
+ 	break;
+ case 'CLOSE_SIDE':
+ 	return{ ...state,isSideOpen:false}
+ 	break;
+ 		case 'OPEN_SEARCH':
+ 			return {...state, searchActive:true}
+ 			break;
+ 		case 'CLOSE_SEARCH':
+ 			return {...state, searchActive:false,sortOpen:false}
+ 			break;
  		case 'SEARCH_VALUE':
- 			return{...state, search:action.payload.value,searchdropDown:action.payload.temp.slice(0,4),searchIndex:null}
+ 			return{...state, search:action.payload.value,searchdropDown:action.payload.temp.slice(0,4),searchIndex:null,sortOpen:false,searchActive:true}
  			break;
  		
  		case 'SUBMIT_SEARCH':
@@ -39,14 +57,14 @@ const reducer =(state,action)=>{
  				if(item.Make.concat( ' ',item.Model.concat(' ',item['Year of manufacture'])).toLowerCase().includes(state.search.toLowerCase()))
  					return item
  			})
- 			return {...state, cards:newCards,searchdropDown:[]}
+ 			return {...state, cards:newCards,searchdropDown:[],searchActive:false,sortOpen:false}
  			break;
  		case 'SEARCH_ON_CLICK':
  			  const newCards2=state.cards_after_filter.filter(item=>{ 
  				if(item.Make.concat( ' ',item.Model.concat(' ',item['Year of manufacture'])).toLowerCase().includes(action.payload.toLowerCase()))
  					return item
  			})
- 			return {...state, cards:newCards2,searchdropDown:[],search:action.payload}
+ 			return {...state, cards:newCards2,searchdropDown:[],search:action.payload,searchActive:false,sortOpen:false}
  			break;
  		case 'DOWN':
  			return{...state, searchIndex:state.searchIndex === null ? 0 : Math.min(state.searchIndex + 1, 3)}
@@ -87,17 +105,16 @@ const reducer =(state,action)=>{
 				all_brand:true,
        	}}
        case 'SORT':
-       
        	return{...state,currentSort:action.payload}
        	break;
 
        case 'OPEN_SORT':
 
-       	return {...state,sortOpen:true}
+       	return {...state,sortOpen:true,searchdropDown:[]}
        	break;
        	  case 'CLOSE_SORT':
 
-       	return {...state,sortOpen:false}
+       	return {...state,sortOpen:false,searchActive:false,searchdropDown:[]}
        	break;
 
        case 'SUBMITFORM' :
@@ -126,6 +143,7 @@ const reducer =(state,action)=>{
 
        	cards_after_filter:filteredCards,
        	filters:newFilters,
+       	isSideOpen:false,
 
        }
        	break;
@@ -138,10 +156,18 @@ const reducer =(state,action)=>{
 
 
 const initialState = {
+  currentView:'Buy Car',
+  currentViewListOpen:false,
+  isSideOpen:false,
 	cards_after_filter:data,
 	cards:[],
 	searchdropDown:[],
-	sortArr:['Recommended', 'A to Z', 'Z to A'],
+	searchActive: false,
+	sortArr:[
+	{	txt:'Recommended',icon:'' },
+	{	txt:'Price',icon:''},
+	{	txt:'Name',icon:''},
+		],
 	sortOpen: false,
 	currentSort:'Recommended',
 	make: [... new Set(data.map(item=>item.Make))],
@@ -168,11 +194,15 @@ const AppProvider =({children})=>{
 
 
 const sort =(arr)=>{
-  if(state.currentSort === 'A to Z'){
+
+  if(state.currentSort === 'Name'){
   	return  arr.sort((a,b)=> a.Make.concat( ' ',a.Model.concat(' ',a['Year of manufacture'])).toLowerCase().localeCompare(b.Make.concat( ' ',b.Model.concat(' ',b['Year of manufacture'])).toLowerCase()));
   }else if(state.currentSort === 'Z to A'){
   	return arr.sort((a,b)=> b.Make.concat( ' ',b.Model.concat(' ',b['Year of manufacture'])).toLowerCase().localeCompare(a.Make.concat( ' ',a.Model.concat(' ',a['Year of manufacture'])).toLowerCase())); 		
   }else if(state.currentSort === 'Recommended'){
+  	return arr;
+  }
+  else{
   	return arr;
   }
 }
@@ -230,6 +260,12 @@ const handleInputChange=(e)=>{
 			return dispatch({type:'SEARCH_VALUE',payload:{value,temp}})	
 		}
 	}
+	const openSearch=()=>{
+     dispatch({type:'OPEN_SEARCH'})
+	}
+	const closeSearch=()=>{
+			 dispatch({type:'CLOSE_SEARCH'})
+	}
 
 	const submitForm=(e)=>{
       e.preventDefault()
@@ -247,7 +283,7 @@ const handleInputChange=(e)=>{
    		}
    }
 	const handleKeyDown =(e)=>{
-		console.log(state.searchIndex)
+		
 		dispatch({type:'AUTO_COMPLETE'})
 
 		if(e.key === 'ArrowDown'){
@@ -262,29 +298,57 @@ const handleInputChange=(e)=>{
 
 	const handleSort=(e)=>{
 	dispatch({type:'CLOSE_SORT'})
-
-		dispatch({type:'SORT' ,payload: e.target.textContent})
+  dispatch({type:'SORT' ,payload: e.target.textContent})
 	}
 	const openSort=()=>{
 		dispatch({type:'OPEN_SORT'})
 	}
-	// const closeSort =()=>{
-	// }
+	const closeSort =()=>{
+			dispatch({type:'CLOSE_SORT'})
+	}
+	const handleCurrentView=()=>{
+		dispatch({type:'OPEN_CURRENT_VIEW'})
+	}
+	const updateCurrentView =(e)=>{
+		dispatch({type:'UPDATE_CURRENT_VIEW',payload:e.target.textContent})
+	}
+	const toggleSide=()=>{
+   dispatch({type:'TOGGLE_SIDE'})
+	}
+	const closeSide=()=>{
+		dispatch({type:'CLOSE_SIDE'})
+	}
 
 useEffect(()=>{
 	 dispatch({type:'SUBMITFORM'})
 	},[])
+useEffect(()=>{
+	const close=(e)=>{
+	console.log(e.target)
+	}
+  document.addEventListener('click',close)
+
+    return ()=>document.removeEventListener('click',close)
+ 
+})
 	return <AppContext.Provider value={
 		{...state,
+		handleCurrentView,
+		updateCurrentView,
+		toggleSide,
+		closeSide,
 		handleInputChange,
 		handleSubmit,
 		handleSearch,
 		searchOnClick,
+		openSearch,
+		closeSearch,
 		handleKeyDown,
 		listRef,
 		handleopendrop,
 		handleSort,
 		openSort,
+		closeSort,
 		sort,
 		 submitForm,
 		newPrice,

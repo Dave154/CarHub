@@ -4,7 +4,13 @@
 	background: var(--primary);
 	padding: 8px 20px;
 	overflow: auto;
+	transform: translateX(0);
+	transition: transform .25s 1s ,display .1s ;
 }
+/*.sideBar_hidden{
+	display: none;
+ transform:  translateX(-100%);
+}*/
 .sideBar form {
 	display: flex;
 	height: 100%;
@@ -15,6 +21,9 @@
 	margin-block: 2rem;
 }*/
 
+.closeSide{
+	display: none;
+}
 h4{
 	margin-block: 1rem;
 }
@@ -139,4 +148,26 @@ h4{
 	float: right;
 	border: 1px solid var(--light-border);
 	margin-block: 10px;
+}
+
+@media (max-width:800px){
+	.sideBar{
+position: fixed;
+inset: 0;
+width:100%;
+height: 100%;
+}
+.sideBar_hidden{
+	display: none;
+ transform:  translateX(-100%);
+}
+.sideBar form {
+	width: 80%;
+	height: 95%;
+	margin: 0 auto;
+
+}
+.closeSide{
+	display: block;
+}
 }

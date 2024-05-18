@@ -2,6 +2,7 @@ import {FaCar} from 'react-icons/fa6'
 import {IoMdNotifications} from 'react-icons/io'
 import {BiSolidMessageSquareDots} from 'react-icons/bi'
 import {IoIosArrowDown} from 'react-icons/io'
+ import {FaLocationDot} from 'react-icons/fa6'
 import styles from './navbar.module.css'
 import testProfile from '../../assets/testphoto.jpg'
 import {useGlobe} from '../context.jsx'
@@ -9,8 +10,14 @@ const Nav = ()=>{
 	const {handleSubmit}=useGlobe()
 	return <header className={`${styles.header}`}>
 		<nav className={`${styles.nav} flex` }>
-			 <div className={styles.nav_left}>
-			 	Something Goes Here
+			 <div className={`${styles.nav_left} flex`}>
+			 	<i><FaLocationDot/></i>
+			 	<span className='flex'>
+			 		
+			 	<p>Nigeria</p> 
+			 	<i><IoIosArrowDown/></i>
+			 	</span>
+
 			 </div>
 			 <a href="#" className={`${styles.logo} flex`}>
 			 	<span className={styles.logo_car}>{<FaCar/>}</span>

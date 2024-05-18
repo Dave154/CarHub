@@ -8,7 +8,7 @@ import Search from '../TaskBar/search.jsx'
 	return<section className={styles.carpage}>
 	 <div className={`${styles.carpage_top}`}>
 	 	<h2 className={styles.no_of_cars}>
-			{cards.length} Cars Found
+			{cards.length} Car{cards.length !== 1 && 's'} Found
 		</h2>
 
 		{/*<Search 

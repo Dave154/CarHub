@@ -2,11 +2,12 @@ import styles from './sidebar.module.css'
 import {LiaShipSolid} from 'react-icons/lia'
 import {TbCurrencyNaira} from 'react-icons/tb'
 import {IoIosArrowDown,IoIosArrowUp} from 'react-icons/io'
+import {FiArrowLeft} from 'react-icons/fi'
 import {useGlobe} from '../context.jsx'
 import {useState} from 'react'
 
 const SideBar = ()=>{
-	const{submitForm,make,newPrice,filterForm,handleInputChange,reset}= useGlobe()
+	const{isSideOpen,closeSide,submitForm,make,newPrice,filterForm,handleInputChange,reset}= useGlobe()
    const {automatic,condition,minPrice,maxPrice,checkboxes,all_brand} =filterForm
 
 	const [showMore,setShowMore] = useState(false)
@@ -14,10 +15,11 @@ const toggleShowMore=()=>{
 	setShowMore(!showMore)
 }
 
-	return <aside className={styles.sideBar}>
+	return <aside className={`${styles.sideBar} ${!isSideOpen && styles.sideBar_hidden}`}>
 	<form>
 		
 		<div className={`${styles.filter_reset} flex`}>
+		    <i onClick={closeSide} className={styles.closeSide}><FiArrowLeft/></i>
 			<h4>Filter </h4>
 			<button type='reset' onClick={reset}>Reset</button>
 		</div>

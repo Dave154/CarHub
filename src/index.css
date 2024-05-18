@@ -4,10 +4,10 @@
 :root{ 
 	--text:#000;
 	--alt-text:#ddd;
-	--background:whitesmoke;
-	--primary:#fff;
+	--background:white;
+	--primary:beige;
 	--secondary:#1c1c1c;
-	--accent:purple;
+	--accent:chocolate;
 	--light-border:rgba(20,20,20 ,.2);
 	--font-size:.8rem;
 
@@ -32,7 +32,8 @@ a{
 ul{
 	list-style: none;
 }
-button,input{
+button,input,i{
+	cursor: pointer;
 	background: none;
 	border: 0;
 	outline: 0;
@@ -46,6 +47,8 @@ img{
 	background:var(--accent);
 	color: var(--alt-text);
 }
+
+
 
 /*REUSABLE*/
 
@@ -61,6 +64,13 @@ img{
 }
 
 
+
+@media (max-width:800px){
+ .active button{
+ 	background: none;
+ 	
+ }
+}
 ::-webkit-scrollbar{
 	width: 3px;
 

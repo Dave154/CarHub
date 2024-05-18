@@ -29,7 +29,7 @@
 .carpage_list{
 	display: grid;
 	justify-content: center;
-	grid-template-columns: repeat(auto-fill, minmax(17rem, 2fr));
+	grid-template-columns: repeat(auto-fill, minmax(13rem, 1fr));
 	grid-template-rows: 1fr 1fr;
 	gap: 20px;
 	height: 70vh;
@@ -46,13 +46,13 @@
 
 .card_content{
 	display: grid;
+	height: 100%;
 	padding: 5px 10px;
 	overflow: hidden;
 
 }
 .card_image{
   width: 100%;
-  background: red;
   max-width: 	20rem;
   aspect-ratio: 1/.6;
   overflow: hidden;
@@ -83,6 +83,8 @@
 	border-radius: 10px;
 }
 .card_bottom{
+	position: relative;
+	bottom: 0;
 margin-top: 10px;
 }
 .price{
@@ -96,4 +98,10 @@ margin-top: 10px;
 }
 .price h3{
 
+}
+@media(max-width:800px){
+	.carpage_list{
+	grid-template-columns: repeat(auto-fill, minmax(10rem, 1fr));
+
+}
 }
